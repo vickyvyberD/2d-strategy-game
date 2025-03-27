@@ -24,7 +24,7 @@ A turn-based 2D strategy game built with HTML5 Canvas, JavaScript, and GSAP anim
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/YOUR_USERNAME/2d-strategy-game.git
+git clone https://github.com/vickyvyberD/2d-strategy-game.git
 cd 2d-strategy-game
 ```
 
