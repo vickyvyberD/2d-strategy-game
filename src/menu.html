@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2D Strategy Game - Menu</title>
+    <script src="https://unpkg.com/@chakra-ui/react@2.8.2/dist/chakra-ui-react.min.js"></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="js/generateBasicSounds.js"></script>
+    <style>
+        :root {
+            --primary-color: #4299e1;
+            --primary-hover: #3182ce;
+            --background-dark: #1a202c;
+            --container-dark: #2d3748;
+            --text-light: #f7fafc;
+            --text-muted: #a0aec0;
+            --error-color: #f56565;
+            --success-color: #2f855a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--background-dark);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .menu-container {
+            background-color: var(--container-dark);
+            padding: clamp(1rem, 5vw, 2rem);
+            border-radius: clamp(0.5rem, 2vw, 1rem);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: min(90%, 600px);
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            gap: clamp(1rem, 3vw, 2rem);
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        .game-title {
+            color: var(--text-light);
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: clamp(1rem, 3vw, 2rem);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            line-height: 1.2;
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: clamp(0.5rem, 2vw, 1rem);
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .menu-button {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: clamp(0.75rem, 2vw, 1rem) clamp(1.5rem, 3vw, 2rem);
+            border: none;
+            border-radius: 0.5rem;
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+
+        .menu-button:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        .menu-button:hover::before {
+            transform: translateX(100%);
+        }
+
+        .menu-button:active {
+            transform: translateY(0);
+        }
+
+        .menu-button:disabled {
+            background-color: var(--text-muted);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .menu-button:disabled::before {
+            display: none;
+        }
+
+        .version {
+            color: var(--text-muted);
+            font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+            margin-top: auto;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .loading {
+            color: var(--text-light);
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .loading::after {
+            content: '';
+            width: 1em;
+            height: 1em;
+            border: 2px solid var(--text-light);
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .error {
+            color: var(--error-color);
+            background-color: rgba(245, 101, 101, 0.1);
+            padding: clamp(0.75rem, 2vw, 1rem);
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            font-size: clamp(0.875rem, 1.5vw, 1rem);
+            transition: all 0.3s ease;
+        }
+
+        .error.success {
+            color: var(--success-color);
+            background-color: rgba(47, 133, 90, 0.1);
+        }
+
+        /* Mobile-specific adjustments */
+        @media (max-width: 480px) {
+            .menu-container {
+                padding: 1rem;
+            }
+
+            .game-title {
+                font-size: 2rem;
+            }
+
+            .menu-button {
+                padding: 0.75rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+
+        /* Tablet-specific adjustments */
+        @media (min-width: 481px) and (max-width: 768px) {
+            .menu-container {
+                padding: 1.5rem;
+            }
+
+            .game-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Landscape mode adjustments */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .menu-container {
+                padding: 1rem;
+                gap: 1rem;
+            }
+
+            .game-title {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
+
+            .button-container {
+                gap: 0.5rem;
+            }
+        }
+
+        /* Add animation classes */
+        .animate-in {
+            opacity: 1;
+            transform: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="menu-container">
+        <h1 class="game-title">2D Strategy Game</h1>
+        <div class="button-container">
+            <button id="startGame" class="menu-button" disabled>Start Game</button>
+            <button id="generateSounds" class="menu-button">Generate Sound Files</button>
+        </div>
+        <div id="loading" class="loading" style="display: none;">Loading game assets...</div>
+        <div id="error" class="error" style="display: none;"></div>
+        <div class="version">Version 1.0.0</div>
+    </div>
+
+    <script type="module" src="js/menu.js"></script>
+</body>
+</html> 

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2D Strategy Game</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Game Info (Resources) -->
+        <div class="game-info">
+            <div id="resources">
+                <div class="resource">Gold: <span id="gold">100</span> (+<span id="gold-rate">5</span>/turn)</div>
+                <div class="resource">Wood: <span id="wood">50</span> (+<span id="wood-rate">3</span>/turn)</div>
+                <div class="resource">Turn: <span id="turn-counter">1</span></div>
+            </div>
+        </div>
+
+        <!-- Main Game Area (Canvas + Shop) -->
+        <div class="game-content">
+            <!-- Game Board -->
+            <div class="game-board">
+                <canvas id="gameCanvas" width="720" height="480"></canvas>
+            </div>
+	    <!-- Commentary Box -->
+            <div id="commentary" class="commentary-box"></div>
+            <!-- Side Panel -->
+            <div class="side-panel">
+                <div class="shop-menu">
+                    <h3>Unit Shop</h3>
+                    <div class="unit-shop">
+                        <div class="shop-item" data-unit="WARRIOR">
+                            <div class="unit-icon">⚔️</div>
+                            <div class="unit-info">
+                                <h4>Warrior</h4>
+                                <p>Strong melee unit</p>
+                                <p>Cost: 50 gold</p>
+                            </div>
+                            <button class="buy-button">Buy</button>
+                        </div>
+                        <div class="shop-item" data-unit="ARCHER">
+                            <div class="unit-icon">🏹</div>
+                            <div class="unit-info">
+                                <h4>Archer</h4>
+                                <p>Ranged attacker</p>
+                                <p>Cost: 40 gold</p>
+                            </div>
+                            <button class="buy-button">Buy</button>
+                        </div>
+                        <div class="shop-item" data-unit="KNIGHT">
+                            <div class="unit-icon">🛡️</div>
+                            <div class="unit-info">
+                                <h4>Knight</h4>
+                                <p>Heavy cavalry</p>
+                                <p>Cost: 80 gold</p>
+                            </div>
+                            <button class="buy-button">Buy</button>
+                        </div>
+                    </div>
+                </div>
+                 
+                <div class="controls">
+                    <button id="generateSounds" class="control-button">Generate Sound Files</button>
+                    <button id="endTurn" class="control-button">End Turn</button>
+                </div>
+            </div>
+
+       
+        </div>
+
+        
+    </div>
+
+    <!-- Instructions Overlay -->
+    
+
+    <script src="js/generateBasicSounds.js"></script>
+    <script type="module" src="js/game.js"></script>
+</body>
+</html> 

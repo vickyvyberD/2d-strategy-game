@@ -1,0 +1,28 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/write-manifests.schema.json",
+  "cdnBasePath": "https://sites.ey.com/sites/test-ohmx/SiteAssets/financial-tracker",
+  "webparts": [
+    {
+      "entryModuleId": "financial-tracker-webpart",
+      "manifestId": "financial-tracker-webpart",
+      "outputModuleId": "financial-tracker-webpart",
+      "entryModuleName": "FinancialTrackerWebPart",
+      "outputModuleName": "FinancialTrackerWebPart",
+      "componentId": "financial-tracker-webpart",
+      "componentType": "WebPart",
+      "description": "Financial Tracker Web Part",
+      "preconfiguredEntries": [
+        {
+          "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+          "group": { "default": "Other" },
+          "title": { "default": "Financial Tracker" },
+          "description": { "default": "Track your financial transactions" },
+          "officeFabricIconFontName": "Money",
+          "properties": {
+            "title": "Financial Tracker"
+          }
+        }
+      ]
+    }
+  ]
+} 

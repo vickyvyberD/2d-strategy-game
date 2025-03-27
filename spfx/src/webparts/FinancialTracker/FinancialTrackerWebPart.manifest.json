@@ -1,0 +1,23 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "financial-tracker-webpart",
+  "alias": "FinancialTrackerWebPart",
+  "componentType": "WebPart",
+  "version": "1.0.0",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": ["SharePointWebPart"],
+  "supportsThemeVariants": true,
+  "preconfiguredEntries": [
+    {
+      "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+      "group": { "default": "Other" },
+      "title": { "default": "Financial Tracker" },
+      "description": { "default": "Track your financial transactions" },
+      "officeFabricIconFontName": "Money",
+      "properties": {
+        "title": "Financial Tracker"
+      }
+    }
+  ]
+} 
